@@ -17,7 +17,6 @@ module.exports = {
             command.exec(client, message, args);
         } catch (e) {
             console.log(e.stack);
-            message.reply(`an error occurred while running the command: ${e}`);
         }
     }
 }
