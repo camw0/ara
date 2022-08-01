@@ -1,0 +1,15 @@
+{
+    "token": "Bot token for Discord.",
+    "prefix": ".",
+    "status": "a singing competition",
+    "role": "Put a role ID here for a DJ role (optional)",
+    "node": {
+        "port": 2333,
+        "host": "127.0.0.1",
+        "password": "youshallnotpass"
+    },
+    "spotify": {
+        "id": "Spotify Client ID",
+        "secret": "Spotify Client Secret"
+    }
+}

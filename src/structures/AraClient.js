@@ -27,7 +27,7 @@ module.exports = class AraClient extends Client {
             send: (id, payload) => {
                 const guild = this.guilds.cache.get(id);
                 if (guild) guild.shard.send(payload);
-            }
+            },
         });
     };
 

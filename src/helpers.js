@@ -8,7 +8,7 @@ const setError = async (message, error) => {
 
 const setSuccess = async (message, success) => {
     await message.reactions.removeAll();
-    if (success) message.reply(success).then(m => d(m));
+    if (success) message.reply(success).then(m => clean(m));
 };
 
 const setLoading = (message) => {

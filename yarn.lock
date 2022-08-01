@@ -203,9 +203,9 @@ strtok3@^7.0.0-alpha.9:
     peek-readable "^5.0.0-alpha.5"
 
 token-types@^5.0.0-alpha.2:
-  version "5.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/token-types/-/token-types-5.0.0-alpha.2.tgz#e43d63b2a8223a593d1c782a5149bec18f1abf97"
-  integrity sha512-EsG9UxAW4M6VATrEEjhPFTKEUi1OiJqTUMIZOGBN49fGxYjZB36k0p7to3HZSmWRoHm1QfZgrg3e02fpqAt5fQ==
+  version "5.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/token-types/-/token-types-5.0.0-alpha.3.tgz#ffc9521bcebd1a6842ff54088275403dca1c2aa1"
+  integrity sha512-GWGtybxmoWRB1pNghnsNBftIfbzGLiTnytq1XKG/0ZQnLmSqgUA4x06dTvqRem5ZuXI0LY3zkNxl2/RG6QwJkA==
   dependencies:
     "@tokenizer/token" "^0.3.0"
     ieee754 "^1.2.1"
