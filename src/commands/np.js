@@ -1,11 +1,11 @@
-const { d } = require('../helpers');
 const { EmbedBuilder } = require('discord.js');
+const { setError, setSuccess } = require('../helpers');
 
 module.exports = {
     name: 'np',
     exec: (client, message) => { 
         const player = client.player.get(message.guild.id);
-        if (!player) return message.reply('there is no player for this guild.').then(m => d(m));
+        if (!player) return setError(message, 'Nothing is currently playing.');
 
         const current = player.queue.current;        
         const embed = new EmbedBuilder()
@@ -16,6 +16,7 @@ module.exports = {
             .setColor('#12aaaa')
             .setTimestamp()
 
+        setSuccess(message);
         return message.channel.send({ embeds: [embed] });
     }
 }

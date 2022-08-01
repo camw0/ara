@@ -1,15 +1,15 @@
+const { setError, setSuccess } = require("../helpers");
+
 module.exports = {
     name: 'stop',
     exec: (client, message) => { 
         const player = client.player.get(message.guild.id);
-        if (!player) return message.reply('there is no player for this guild.');
-
         const { channel } = message.member.voice;
 
-        if (!channel) return message.reply('you need to join a voice channel.');
-        if (channel.id !== player.voiceChannel) return message.reply('you\'re not in the same voice channel.');
+        if (!player) return setError(message, 'Nothing is currently playing.');
+        if (!channel || channel.id !== player.voiceChannel) return setError(message, 'Please join my channel to run commands.');
 
         player.destroy();
-        return message.reply("destroyed the player.");
+        return setSuccess(message);
     }
 }

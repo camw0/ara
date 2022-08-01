@@ -39,9 +39,9 @@ module.exports = class AraClient extends Client {
             .login(config.token);
 
         this.player
+            .on('queueEnd', player => player.destroy())
             .on('nodeError', node => console.log(node.options.host + ' errored'))
             .on('nodeConnect', node => console.log(node.options.host + ' connected'))
             .on('nodeDisonnect', node => console.log(node.options.host + ' disconnected'));
     }
-
 }

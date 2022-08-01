@@ -1,5 +1,7 @@
 'use strict';
 
+const { setLoading } = require("../helpers");
+
 module.exports = {
     exec: async (client, message) => {
         // Some checks to see if it's a valid message
@@ -14,6 +16,7 @@ module.exports = {
       
         // Run the command and catch any errors
         try {
+            setLoading(message);
             command.exec(client, message, args);
         } catch (e) {
             console.log(e.stack);

@@ -1,23 +1,22 @@
+const { setError, setSuccess } = require("../helpers");
+
 module.exports = {
     name: 'play',
     exec: async (client, message, args) => {
-        if (!message.member.voice.channel) return message.reply("you need to join a voice channel.");
-        if (!args.length) return message.reply('Please provide a search query or URL.');
+        if (!message.member.voice.channel) return setError(message, 'You need to join a voice channel to run commands.');
+        if (!args.length) return setError(message, 'Please provide a search query or URL.');
 
         const search = args.join(" ");
         let res;
 
         try {
-            // Search for tracks using a query or url, using a query searches youtube automatically and the track requester object
             res = await client.player.search(search, message.author);
-            // Check the load type as this command is not that advanced for basics
-            if (res.loadType === "LOAD_FAILED") throw res.exception;
-            else if (res.loadType === "PLAYLIST_LOADED") throw { message: "Playlists are not supported with this command." };
-        } catch (err) {
-            return message.reply(`there was an error while searching: ${err.message}`);
-        }
 
-        if (res.loadType === "NO_MATCHES") return message.reply("there was no tracks found with that query.");
+            if (res.loadType === "LOAD_FAILED") return setError(message, 'Unable to load track (\`LOAD_FAILED\`).');
+            else if (res.loadType === "PLAYLIST_LOADED") return setError(message, 'Playlists are not supported with this command (\`PLAYLIST_LOADED\`).');
+        } catch (err) {
+            return setError(message, 'An unexpected error occurred while finding that track.');
+        }
 
         // Create the player 
         const player = client.player.create({
@@ -33,6 +32,6 @@ module.exports = {
         // Checks if the client should play the track if it's the first one added
         if (!player.playing && !player.paused && !player.queue.size) player.play()
 
-        return message.reply(`enqueuing ${res.tracks[0].title}.`);
+        return setSuccess(message);
     }
   }
