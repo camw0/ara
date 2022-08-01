@@ -4,7 +4,7 @@ const { Manager } = require('erela.js');
 const Spotify = require('erela.js-spotify');
 const config = require('../../config.json');
 const message = require('../events/message');
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, ActivityType } = require('discord.js');
 
 module.exports = class AraClient extends Client {
     /**
@@ -34,14 +34,19 @@ module.exports = class AraClient extends Client {
     start () {
         this
             .on('raw', d => this.player.updateVoiceState(d))
-            .once('ready', () => this.player.init(this.user.id))
             .on('messageCreate', async m => message.exec(this, m))
-            .login(config.token);
+            .once('ready', () => { this.player.init(this.user.id); this.activity() })
 
         this.player
             .on('queueEnd', player => player.destroy())
             .on('nodeError', node => console.log(node.options.host + ' errored'))
             .on('nodeConnect', node => console.log(node.options.host + ' connected'))
             .on('nodeDisonnect', node => console.log(node.options.host + ' disconnected'));
+
+        this.login(config.token);
+    }
+
+    activity () {
+        this.user.setActivity(config.status ? config.status : 'nothing', { type: ActivityType.Competing });
     }
 }
