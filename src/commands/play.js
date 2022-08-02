@@ -24,14 +24,15 @@ module.exports = {
             voiceChannel: message.member.voice.channel.id,
             textChannel: message.channel.id,
         });
-    
+
         // Connect to the voice channel and add the track to the queue
         player.connect();
+        player.setVolume(50);
         player.queue.add(res.tracks[0]);
-    
+
         // Checks if the client should play the track if it's the first one added
         if (!player.playing && !player.paused && !player.queue.size) player.play()
 
         return setSuccess(message);
     }
-  }
+}

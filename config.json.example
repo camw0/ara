@@ -3,6 +3,7 @@
     "prefix": ".",
     "status": "a singing competition",
     "role": "Put a role ID here for a DJ role (optional)",
+    "logging" true,
     "node": {
         "port": 2333,
         "host": "127.0.0.1",

@@ -12,4 +12,4 @@ module.exports = {
         player.stop();
         return setSuccess(message);
     }
-  }
+}

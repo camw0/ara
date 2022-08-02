@@ -29,5 +29,5 @@ module.exports = {
 
         setSuccess(message);
         return message.channel.send({ embeds: [queueEmbed] });
-  }
+    }
 }
