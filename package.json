@@ -1,15 +1,25 @@
 {
   "name": "ara",
-  "version": "1.0.0",
-  "description": "A Discord bot using ErelaJS to playback audio.",
-  "main": "src/index.js",
-  "repository": "https://ara.heyim.cam",
-  "author": "Cam White",
   "license": "MIT",
-  "private": false,
+  "version": "0.0.10",
+  "main": "src/index.js",
+  "author": "https://github.com/cmrxnn",
+  "repository": "https://https://github.com/cmrxnn/ara",
+  "description": "A Discord bot using ErelaJS to playback audio.",
+  "scripts": {
+    "start": "node src/index.js",
+    "bump": "yarn; yarn upgrade"
+  },
   "dependencies": {
     "discord.js": "^14.1.2",
     "erela.js": "^2.3.3",
     "erela.js-spotify": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0"
   }
 }
