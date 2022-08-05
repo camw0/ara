@@ -8,31 +8,33 @@ module.exports = {
     if (!args.length) return setError(message, 'Please provide a search query or URL.')
 
     const search = args.join(' ')
-    let res
 
     try {
-      res = await client.player.search(search, message.author)
+      const { loadType, playlistInfo: { name }, tracks }= await client.player.search(search, message.author)
 
-      if (res.loadType === 'LOAD_FAILED') return setError(message, 'Unable to load track (`LOAD_FAILED`).')
-      else if (res.loadType === 'PLAYLIST_LOADED') return setError(message, 'Playlists are not supported with this command (`PLAYLIST_LOADED`).')
+      if (loadType === 'LOAD_FAILED' || !tracks.length) return setError(message, 'Unable to load track (`LOAD_FAILED`).')
+
+      const player = client.player.create({
+        guild: message.guild.id,
+        voiceChannel: message.member.voice.channel.id,
+        textChannel: message.channel.id
+      })
+
+      if (loadType === 'PLAYLIST_LOADED') {
+        for (const tracks of track) {
+          player.queue.push(track)
+        }
+      } else {
+        player.queue.push(tracks[0])
+      }
+
+      player.connect()
+      player.setVolume(25)
+  
+      if (!player.playing && !player.paused && !player.queue.size) player.play()
     } catch (err) {
-      return setError(message, 'An unexpected error occurred while finding that track.')
+      return setError(message, 'An unexpected error occurred while attempting to play that.')
     }
-
-    // Create the player
-    const player = client.player.create({
-      guild: message.guild.id,
-      voiceChannel: message.member.voice.channel.id,
-      textChannel: message.channel.id
-    })
-
-    // Connect to the voice channel and add the track to the queue
-    player.connect()
-    player.setVolume(50)
-    player.queue.add(res.tracks[0])
-
-    // Checks if the client should play the track if it's the first one added
-    if (!player.playing && !player.paused && !player.queue.size) player.play()
 
     return setSuccess(message)
   }
