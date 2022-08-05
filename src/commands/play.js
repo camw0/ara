@@ -2,6 +2,7 @@ const { setError, setSuccess } = require('../helpers')
 
 module.exports = {
   name: 'play',
+  aliases: ['p'],
   exec: async (client, message, args) => {
     if (!message.member.voice.channel) return setError(message, 'You need to join a voice channel to run commands.')
     if (!args.length) return setError(message, 'Please provide a search query or URL.')

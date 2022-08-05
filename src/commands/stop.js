@@ -2,6 +2,7 @@ const { setError, setSuccess } = require('../helpers')
 
 module.exports = {
   name: 'stop',
+  aliases: ['fuckoff', 'end', 'leave'],
   exec: (client, message) => {
     const player = client.player.get(message.guild.id)
     const { channel } = message.member.voice

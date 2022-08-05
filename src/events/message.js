@@ -8,7 +8,7 @@ module.exports = {
   exec: async (client, message) => {
     const prefix = message.content.toLowerCase().startsWith(client.prefix) ? client.prefix : `<@!${client.user.id}> `
     const [name, ...args] = message.content.slice(prefix.length).trim().split(/ +/g)
-    const command = client.commands.get(name)
+    const command = client.commands.get(name) || client.commands.find(c => c.aliases && c.aliases.includes(name));
 
     if (!message.guild || message.author.bot) return
     if (!command) return

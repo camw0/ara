@@ -2,6 +2,7 @@ const { clean, setError, setSuccess } = require('../helpers')
 
 module.exports = {
   name: 'volume',
+  aliases: ['v', 'vol'],
   exec: (client, message, args) => {
     const player = client.player.get(message.guild.id)
     if (!args.length) return message.reply(`The volume is currently set to \`${player.volume}%\`.`).then(m => clean(m))

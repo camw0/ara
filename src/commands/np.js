@@ -3,6 +3,7 @@ const { setError, setSuccess } = require('../helpers')
 
 module.exports = {
   name: 'np',
+  alisases: ['n'],
   exec: (client, message) => {
     const player = client.player.get(message.guild.id)
     if (!player) return setError(message, 'Nothing is currently playing.')
